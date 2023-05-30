@@ -19,9 +19,9 @@ formatNAs <- function(df){
   return(df)
 }
 
-formatNumbers <- function(df){
-    df[, 5:16] <- lapply(df[, 5:16], as.numeric)
-    return(df)
+formatNumbers <- function(df) {
+  df[, 5:16] <- lapply(df[, 5:16], as.numeric)
+  return(df)
 }
 
 mergeAndSum <- function(x, y){
