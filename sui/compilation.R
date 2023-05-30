@@ -13,9 +13,16 @@ numeric_interval <- 11
 df[, 5:16][is.na(df[, 5:16])] <- NA
 df <- df[complete.cases(df[, numeric_interval]),]
 
-ejemplo <- df %>% subset(Departamento == "ANTIOQUIA" & Municipio == "BELLO")
 muni <- df %>% distinct(Departamento, Municipio)
-muni <- muni %>% mutate(totResidencial == mean(ejemplo$totResidencial))
+muni <- muni %>% mutate(totResidencial = NA)
+
+testFunctionMean <- function(dept, munic){
+    subsetDF <- df %>% subset(Departamento == toupper(dept) & Municipio == toupper(munic))
+    muni <<- muni %>% mutate(totResidencial = ifelse(Municipio == toupper(munic), mean(subsetDF$totResidencial), totResidencial))
+}
+
+testFunctionMean("ANTIOQUIA", "ARGELIA")
+testFunctionMean("ANTIOQUIA", "ABEJORRAL")
 #
 
 ######
