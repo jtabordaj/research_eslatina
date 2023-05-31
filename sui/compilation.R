@@ -13,6 +13,8 @@ numeric_interval <- 11
 df[, 5:16][is.na(df[, 5:16])] <- NA
 df <- df[complete.cases(df[, numeric_interval]),]
 
+##
+
 muni <- df %>% distinct(Departamento, Municipio)
 muni <- muni %>% mutate(totResidencial = NA)
 
@@ -20,6 +22,16 @@ testFunctionMean <- function(dept, munic){
     subsetDF <- df %>% subset(Departamento == toupper(dept) & Municipio == toupper(munic))
     muni <<- muni %>% mutate(totResidencial = ifelse(Municipio == toupper(munic), mean(subsetDF$totResidencial), totResidencial))
 }
+
+bulkPush <- function(dept){
+    subsetDF1 <- df %>% subset(Departamento == toupper("ANTIOQUIA"))
+    municipalities <- subsetDF1 %>% distinct(Municipio)
+    for(i in municipalities){
+        testFunctionMean(toupper(dept), i)
+    }
+}
+
+bulkPush("ANTIOQUIA")
 
 testFunctionMean("ANTIOQUIA", "ARGELIA")
 testFunctionMean("ANTIOQUIA", "ABEJORRAL")
