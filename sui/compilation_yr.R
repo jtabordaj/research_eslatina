@@ -48,3 +48,8 @@ df <- df %>% mutate(totNoResidencial = rowMeans(df[, tNoRes], na.rm = TRUE))
 df <- df %>% select(any_of(varnames))
 
 df[NaNSwitch(df)] <- NA
+
+###
+
+path <- paste("./sui/data/",type,"/",year,"/",variable,"/",year,".xlsx", sep = "")
+write_xlsx(df, path)
