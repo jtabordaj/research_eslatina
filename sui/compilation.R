@@ -1,6 +1,6 @@
 source("./sui/dependencies.R")
 
-month <- 1
+month <- 11
 year <- 2021
 type <- "energia"
 variable <- "pcon"
@@ -46,6 +46,7 @@ df_combined[NaNSwitch(df_combined)] <- NA
 ##
 
 path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",month,".xlsx", sep = "")
+df_combined$Departamento %>% table()
 write_xlsx(df_combined, path)
 
 ######################################
