@@ -1,6 +1,6 @@
 source("./sui/dependencies.R")
 
-month <- 11
+month <- 12
 year <- 2021
 type <- "energia"
 variable <- "pcon"
@@ -43,10 +43,16 @@ df_combined <- do.call(rbind, dflist)
 rownames(df_combined) <- c(1:nrow(df_combined))
 
 df_combined[NaNSwitch(df_combined)] <- NA
+suffix <- paste("_", month, sep = "")
+for (i in 3:10) {
+    colnames(df_combined)[i] <- paste0(colnames(df_combined)[i], suffix, sep = "")
+}
 ##
+View(df_combined)
 
 path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",month,".xlsx", sep = "")
-df_combined$Departamento %>% table()
 write_xlsx(df_combined, path)
+df_combined$Departamento %>% table()
+paste("Wrote file")
 
 ######################################

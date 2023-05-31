@@ -12,6 +12,7 @@ varnames <- c("Departamento", "Municipio", "Empresa", "Variable",
     "totResidencial", "Industrial", "Comercial", "Oficial", "Otros", "totNoResidencial"
 )
 
+
 varNamesDepartments <- c("AMAZONAS", "ANTIOQUIA", "ARAUCA", "ATLANTICO", "BOLIVAR", "BOGOTA", "BOYACA", "CALDAS", 
     "CAQUETA", "CASANARE", "CAUCA", "CESAR", "CHOCO", "CORDOBA", "CUNDINAMARCA", "GUAINIA", "GUAVIARE", 
     "HUILA", "LA GUAJIRA", "MAGDALENA", "META", "NARINO", "NORTE DE SANTANDER", "PUTUMAYO", "QUINDIO", 
@@ -24,6 +25,13 @@ readFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/",i,".csv", sep = "")
         assign(paste(variable,year,"_",i, sep=""), read_csv(path), envir=.GlobalEnv);
+    }
+}
+
+readCompFiles <- function(year, monthStart, monthEnd, type, variable){
+    for(i in monthStart:monthEnd){
+        path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",i,".xlsx", sep = "")
+        assign(paste(variable,year,"_",i, sep=""), read_xlsx(path), envir=.GlobalEnv);
     }
 }
 
