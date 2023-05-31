@@ -12,6 +12,14 @@ varnames <- c("Departamento", "Municipio", "Empresa", "Variable",
     "totResidencial", "Industrial", "Comercial", "Oficial", "Otros", "totNoResidencial"
 )
 
+varNamesDepartments <- c("AMAZONAS", "ANTIOQUIA", "ARAUCA", "ATLANTICO", "BOLIVAR", "BOGOTA", "BOYACA", "CALDAS", 
+    "CAQUETA", "CASANARE", "CAUCA", "CESAR", "CHOCO", "CORDOBA", "CUNDINAMARCA", "GUAINIA", "GUAVIARE", 
+    "HUILA", "LA GUAJIRA", "MAGDALENA", "META", "NARINO", "NORTE DE SANTANDER", "PUTUMAYO", "QUINDIO", 
+    "RISARALDA", "SAN ANDRES", "SANTANDER", "SUCRE", "TOLIMA", "VALLE DEL CAUCA", 
+    "VAUPES", "VICHADA"
+)
+
+
 readFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/",i,".csv", sep = "")
@@ -34,8 +42,16 @@ formatRegion <- function(df){
     return(df)
 }
 
-mergeAndSum <- function(x, y){
-    merged <- merge(x, y, by = c("row_names", "col_names"), all = TRUE)
-    merged[, -c(1, 2)] <- rowSums(merged[, -c(1, 2)], na.rm = TRUE)
-    return(merged)
+bulkPush <- function(dept){
+    subsetDF1 <- df %>% subset(Departamento == toupper(dept))
+    municipalities <- subsetDF1 %>% distinct(Municipio)
+    output <- data.frame()
+    for (i in municipalities$Municipio) {
+        subsetDF2 <- df %>% filter(Departamento == toupper(dept) & Municipio == toupper(i))
+        mean_value <- mean(subsetDF2$totResidencial)
+        row <- data.frame(Departamento = dept, Municipio = toupper(i), totResidencial = mean_value)
+        output <- rbind(output, row)
+        #output <<- rbind(output, row) %>% distinct()
+  }
+  return(output) 
 }

@@ -4,9 +4,11 @@ readFiles(2021, 1, 12, "energia", "pcon")
 allDataFrames <- names(which(unlist(eapply(.GlobalEnv, is.data.frame))))
 
 df <- pcon2021_1
-colnames(df) <- varnames
-pattern <- "^MEDELL"
 
+##
+colnames(df) <- varnames
+df <- df %>% filter(Departamento %in% varNamesDepartments)
+pattern <- "^MEDELL"
 df <- df %>% mutate(Municipio = ifelse(grepl(pattern, Municipio), "MEDELLIN", Municipio))
 df <- df %>% formatNumbers()
 df <- df %>% formatRegion()
@@ -17,33 +19,20 @@ df <- df[complete.cases(df[, numeric_interval]),]
 
 ##
 
-output <- df %>% distinct(Departamento, Municipio)
-output <- output %>% mutate(totResidencial = NA)
-
-bulkPush <- function(dept){
-    subsetDF1 <- df %>% subset(Departamento == toupper(dept))
-    municipalities <- subsetDF1 %>% distinct(Municipio)
-    output <- data.frame()
-    for (i in municipalities$Municipio) {
-        subsetDF2 <- df %>% filter(Departamento == toupper(dept) & Municipio == toupper(i))
-        mean_value <- mean(subsetDF2$totResidencial)
-        row <- data.frame(Municipio = toupper(i), totResidencial = mean_value)
-        output <- rbind(output, row)
-  }
-  return(output) 
+for(i in unique(df$Departamento)){
+    assign(paste("consolidado",i, sep = ""), bulkPush(i))
 }
 
-bulkPush("ANTIOQUIA")
+allDataFrames <- names(which(unlist(eapply(.GlobalEnv, is.data.frame))))
+onlyConsolidado <- allDataFrames[grep("^consolidado", allDataFrames)]
 
-testFunctionMean("ANTIOQUIA", "ARGELIA")
-testFunctionMean("ANTIOQUIA", "ABEJORRAL")
-#
-
-######
 dflist <- list()
-for(df in allDataFrames){
+for(df in onlyConsolidado){
     dflist[[df]] <- get(df)
 }
 
-dflist <- lapply(dflist, formatNAs)
-dflist <- lapply(dflist, formatNumbers)
+df_combined <- do.call(rbind, dflist)
+rownames(df_combined) <- c(1:nrow(df_combined))
+
+##
+
