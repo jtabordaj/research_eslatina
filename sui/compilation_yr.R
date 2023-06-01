@@ -2,7 +2,7 @@ source("./sui/dependencies.R")
 
 year <- 2022
 type <- "energia"
-variable <- "pcon"
+variable <- "pfac"
 
 
 ######################################

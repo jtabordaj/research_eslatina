@@ -1,9 +1,9 @@
 source("./sui/dependencies.R")
 
 month <- 12
-year <- 2022
+year <- 2021
 type <- "energia"
-variable <- "pcon"
+variable <- "pfac"
 
 
 ######################################
