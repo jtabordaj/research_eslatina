@@ -1,7 +1,7 @@
 source("./sui/dependencies.R")
 
 month <- 12
-year <- 2021
+year <- 2022
 type <- "energia"
 variable <- "pcon"
 
@@ -11,7 +11,7 @@ variable <- "pcon"
 readFiles(year, 1, 12, type, variable)
 allDataFrames <- names(which(unlist(eapply(.GlobalEnv, is.data.frame))))
 
-df <- get(paste("pcon2021_",month, sep = ""))
+df <- get(paste(variable,year,"_",month, sep = ""))
 
 ##
 
