@@ -28,6 +28,18 @@ readFiles <- function(year, monthStart, monthEnd, type, variable){
     }
 }
 
+readYearFiles <- function(year, type){
+    var <- c("vcon", "tcon", "sus", "ptar", "pfac", "pcon", "fac")
+    for(i in var){
+    if(i != "pfac" &&   i != "pcon"){
+        path <- paste("./sui/data/",type,"/",year,"/",i,"/",year,"_",i,".xls", sep = "")
+        assign(paste(i,"_",year, sep=""), read_excel(path), envir=.GlobalEnv)
+    } else {
+        path <- paste("./sui/data/",type,"/",year,"/",i,"/",year,"_",i,".xlsx", sep = "")
+        assign(paste(i,"_",year, sep=""), read_xlsx(path), envir=.GlobalEnv)
+    }
+}}
+
 readCompFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",i,".xlsx", sep = "")
@@ -47,6 +59,16 @@ formatNumbers <- function(df) {
 
 formatRegion <- function(df){
     df[, 1:4] <- lapply(df[, 1:4], as.factor)
+    return(df)
+}
+
+formatNumbersYr <- function(df) {
+  df[, 3:10] <- lapply(df[, 3:10], as.numeric)
+  return(df)
+}
+
+formatRegionYr <- function(df){
+    df[, 1:2] <- lapply(df[, 1:2], as.factor)
     return(df)
 }
 
