@@ -5,8 +5,11 @@ type <- "energia"
 
 readYearFiles(year, type)
 
-df <- fac_2021
-frame <- df
+varnameEx <- "fac"
+yr <- 2021
+
+df <- get(paste(varnameEx, "_", yr, sep = ""))
+
 
 ###
 
@@ -20,9 +23,15 @@ numeric_interval <- 9
 df[, 3:10][is.na(df[, 3:10])] <- NA
 df <- df[complete.cases(df[, numeric_interval]),]
 
-for(i in unique(df$Departamento)){
+##################### STOP ############################
+
+if(varnameEx == "pfac" | varnameEx == "pcon" | varnameEx == "ptar"){
+    for(i in unique(df$Departamento)){
     assign(paste("consolidado",i, sep = ""), bulkPush(i))
-}
+}} else {
+   for(i in unique(df$Departamento)){
+    assign(paste("consolidado",i, sep = ""), bulkPushCumSum(i))
+}}
 
 ###
 
@@ -37,16 +46,14 @@ for(df in onlyConsolidado){
 df_combined <- do.call(rbind, dflist)
 rownames(df_combined) <- c(1:nrow(df_combined))
 df_combined[NaNSwitch(df_combined)] <- NA
-
-suffix <- paste("_", df, sep = "")
 for (i in 3:10) {
-    colnames(df_combined)[i] <- paste0(colnames(df_combined)[i], suffix, sep = "")
+    colnames(df_combined)[i] <- paste0(colnames(df_combined)[i], "_", varnameEx, sep = "")
 }
 
 ###
 
 View(df_combined)
-path <- paste("./sui/data/",type,"/",year,"/output/",frame,".xlsx", sep = "")
+path <- paste("./sui/data/",type,"/",year,"/output/",varnameEx,".xlsx", sep = "")
 write_xlsx(df_combined, path)
 df_combined$Departamento %>% table()
 paste("Wrote file")

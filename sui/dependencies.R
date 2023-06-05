@@ -13,7 +13,7 @@ varnames <- c("Departamento", "Municipio", "Empresa", "Variable",
 )
 
 
-varNamesDepartments <- c("AMAZONAS", "ANTIOQUIA", "ARAUCA", "ATLANTICO", "BOLIVAR", "BOGOTA", "BOYACA", "CALDAS", 
+varNamesDepartments <- c("AMAZONAS", "ANTIOQUIA", "ARAUCA", "ATLANTICO", "BOLIVAR", "BOGOTA", "BOGOTA, D.C.", "BOYACA", "CALDAS", 
     "CAQUETA", "CASANARE", "CAUCA", "CESAR", "CHOCO", "CORDOBA", "CUNDINAMARCA", "GUAINIA", "GUAVIARE", 
     "HUILA", "LA GUAJIRA", "MAGDALENA", "META", "NARINO", "NORTE DE SANTANDER", "PUTUMAYO", "QUINDIO", 
     "RISARALDA", "SAN ANDRES", "SANTANDER", "SUCRE", "TOLIMA", "VALLE DEL CAUCA", 
@@ -96,6 +96,36 @@ bulkPush <- function(dept){
             Estrato6 = mean_value_E6,
             totResidencial = mean_value_R, 
             totNoResidencial = mean_value_NR)
+        output <- rbind(output, row)
+        #output <<- rbind(output, row) %>% distinct()
+  }
+  return(output) 
+}
+
+bulkPushCumSum <- function(dept){
+    subsetDF1 <- df %>% subset(Departamento == toupper(dept))
+    municipalities <- subsetDF1 %>% distinct(Municipio)
+    output <- data.frame()
+    for (i in municipalities$Municipio) {
+        subsetDF2 <- df %>% filter(Departamento == toupper(dept) & Municipio == toupper(i))
+        cumsum_value_E1 <- sum(subsetDF2$Estrato1, na.rm = TRUE)
+        cumsum_value_E2 <- sum(subsetDF2$Estrato2, na.rm = TRUE)
+        cumsum_value_E3 <- sum(subsetDF2$Estrato3, na.rm = TRUE)
+        cumsum_value_E4 <- sum(subsetDF2$Estrato4, na.rm = TRUE)
+        cumsum_value_E5 <- sum(subsetDF2$Estrato5, na.rm = TRUE)
+        cumsum_value_E6 <- sum(subsetDF2$Estrato6, na.rm = TRUE)
+        cumsum_value_R <- sum(subsetDF2$totResidencial, na.rm = TRUE)
+        cumsum_value_NR <- sum(subsetDF2$totNoResidencial, na.rm = TRUE)
+        row <- data.frame(Departamento = toupper(dept), 
+            Municipio = toupper(i), 
+            Estrato1 = cumsum_value_E1,
+            Estrato2 = cumsum_value_E2,
+            Estrato3 = cumsum_value_E3,
+            Estrato4 = cumsum_value_E4,
+            Estrato5 = cumsum_value_E5,
+            Estrato6 = cumsum_value_E6,
+            totResidencial = cumsum_value_R, 
+            totNoResidencial = cumsum_value_NR)
         output <- rbind(output, row)
         #output <<- rbind(output, row) %>% distinct()
   }
