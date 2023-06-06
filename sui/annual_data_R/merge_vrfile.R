@@ -1,14 +1,12 @@
 source("./sui/dependencies.R")
 
-year <- 2021
+year <- 2022
 type <- "energia"
+varnameEx <- "vcon"
 
 readYearFiles(year, type)
 
-varnameEx <- "fac"
-yr <- 2021
-
-df <- get(paste(varnameEx, "_", yr, sep = ""))
+df <- get(paste(varnameEx, "_", year, sep = ""))
 
 
 ###
