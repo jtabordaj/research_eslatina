@@ -20,7 +20,6 @@ varNamesDepartments <- c("AMAZONAS", "ANTIOQUIA", "ARAUCA", "ATLANTICO", "BOLIVA
     "VAUPES", "VICHADA"
 )
 
-
 readFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/",i,".csv", sep = "")
@@ -31,7 +30,7 @@ readFiles <- function(year, monthStart, monthEnd, type, variable){
 readYearFiles <- function(year, type){
     var <- c("vcon", "tcon", "sus", "ptar", "pfac", "pcon", "fac")
     for(i in var){
-    if(i != "pfac" &&   i != "pcon"){
+    if(i != "pfac" && i != "pcon"){
         path <- paste("./sui/data/",type,"/",year,"/",i,"/",year,"_",i,".xls", sep = "")
         assign(paste(i,"_",year, sep=""), read_excel(path), envir=.GlobalEnv)
     } else {
@@ -39,6 +38,14 @@ readYearFiles <- function(year, type){
         assign(paste(i,"_",year, sep=""), read_xlsx(path), envir=.GlobalEnv)
     }
 }}
+
+readOutputs <- function(year, type){
+    var <- c("vcon", "tcon", "sus", "ptar", "pfac", "pcon", "fac")
+    for(i in var){
+        path <- paste("./sui/data/",type,"/",year,"/output/",i,".xlsx", sep = "")
+        assign(paste(i,"_",year, sep=""), read_xlsx(path), envir=.GlobalEnv)
+    }
+}
 
 readCompFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
