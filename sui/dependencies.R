@@ -122,7 +122,35 @@ bulkPush <- function(dept){
   return(output) 
 }
 
-bulkPushCumSum <- function(dept){
+bulkPushCumSum <- function(dept){if(varnameEx == "vconfac"){
+    subsetDF1 <- df %>% subset(Departamento == toupper(dept))
+    municipalities <- subsetDF1 %>% distinct(Municipio)
+    output <- data.frame()
+    for (i in municipalities$Municipio) {
+        subsetDF2 <- df %>% filter(Departamento == toupper(dept) & Municipio == toupper(i))
+        cumsum_value_E1 <- sum(subsetDF2$Estrato1, na.rm = TRUE)
+        cumsum_value_E2 <- sum(subsetDF2$Estrato2, na.rm = TRUE)
+        cumsum_value_E3 <- sum(subsetDF2$Estrato3, na.rm = TRUE)
+        cumsum_value_E4 <- sum(subsetDF2$Estrato4, na.rm = TRUE)
+        cumsum_value_E5 <- sum(subsetDF2$Estrato5, na.rm = TRUE)
+        cumsum_value_E6 <- sum(subsetDF2$Estrato6, na.rm = TRUE)
+        cumsum_value_R <- sum(subsetDF2$totResidencial_vcon, na.rm = TRUE)
+        cumsum_value_RF <- sum(subsetDF2$totResidencial_fac, na.rm = TRUE)
+        row <- data.frame(Departamento = toupper(dept), 
+            Municipio = toupper(i), 
+            Estrato1 = cumsum_value_E1,
+            Estrato2 = cumsum_value_E2,
+            Estrato3 = cumsum_value_E3,
+            Estrato4 = cumsum_value_E4,
+            Estrato5 = cumsum_value_E5,
+            Estrato6 = cumsum_value_E6,
+            totResidencial_vcon = cumsum_value_R, 
+            totResidencial_fac = cumsum_value_RF)
+        output <- rbind(output, row)
+        #output <<- rbind(output, row) %>% distinct()
+  }
+  return(output) 
+} else {
     subsetDF1 <- df %>% subset(Departamento == toupper(dept))
     municipalities <- subsetDF1 %>% distinct(Municipio)
     output <- data.frame()
@@ -150,7 +178,7 @@ bulkPushCumSum <- function(dept){
         #output <<- rbind(output, row) %>% distinct()
   }
   return(output) 
-}
+}}
 
 NaNSwitch <- function(x){
     do.call(cbind, lapply(x, is.nan))
