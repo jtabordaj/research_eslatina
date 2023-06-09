@@ -1,8 +1,8 @@
 source("./sui/dependencies.R")
 
-year <- 2022
+year <- 2021
 type <- "energia"
-varnameEx <- "vcon"
+varnameEx <- "sus"
 
 readYearFiles(year, type)
 
@@ -44,6 +44,7 @@ for(df in onlyConsolidado){
 df_combined <- do.call(rbind, dflist)
 rownames(df_combined) <- c(1:nrow(df_combined))
 df_combined[NaNSwitch(df_combined)] <- NA
+
 for (i in 3:10) {
     colnames(df_combined)[i] <- paste0(colnames(df_combined)[i], "_", varnameEx, sep = "")
 }

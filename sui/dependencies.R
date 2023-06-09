@@ -47,6 +47,14 @@ readOutputs <- function(year, type){
     }
 }
 
+readOutputs2 <- function(year, type){
+    var <- c("sus", "tcon", "vconfac")
+    for(i in var){
+        path <- paste("./sui/data/",type,"/",year, "/", i,".xls", sep = "")
+        assign(paste(i,"_",year, sep=""), read_excel(path), envir=.GlobalEnv)
+    }
+}
+
 readCompFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",i,".xlsx", sep = "")
@@ -59,18 +67,23 @@ formatNAs <- function(df){
     return(df)
 }
 
-formatNumbers <- function(df) {
-  df[, 5:16] <- lapply(df[, 5:16], as.numeric)
-  return(df)
-}
-
 formatRegion <- function(df){
     df[, 1:4] <- lapply(df[, 1:4], as.factor)
     return(df)
 }
 
+formatNumbers <- function(df) {
+  df[, 5:16] <- lapply(df[, 5:16], as.numeric)
+  return(df)
+}
+
 formatNumbersYr <- function(df) {
   df[, 3:10] <- lapply(df[, 3:10], as.numeric)
+  return(df)
+}
+
+formatNumbersYr2 <- function(df) {
+  df[, 3:9] <- lapply(df[, 3:9], as.numeric)
   return(df)
 }
 
