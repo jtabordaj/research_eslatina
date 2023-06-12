@@ -4,17 +4,19 @@ source("./sui/dependencies.R")
 ## Generate a db of regions (Basis of consumption is demand so I load subscribers)
 
 data <- read_excel("./sui/data/energia/2021/sus/2021_sus.xls")
+data2 <- read_excel("./sui/data/energia/2022/sus/2022_sus.xls")
 
 data$Departamento <- as.factor(data$Departamento)
 data$Municipio <- as.factor(data$Municipio)
 
-summary(data)
+data2$Departamento <- as.factor(data2$Departamento)
+data2$Municipio <- as.factor(data2$Municipio)
 
 regions <- data[,1:2]
-
-unique(regions$Departamento)
+regions2 <- data2[,1:2]
 
 regions_unique <- regions[!duplicated(regions), ]
+regions_unique2 <- regions2[!duplicated(regions2), ]
 
 ##### Load generated dbs to find regions without data
 
