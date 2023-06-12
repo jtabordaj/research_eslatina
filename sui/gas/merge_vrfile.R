@@ -1,6 +1,6 @@
 source("./sui/dependencies.R")
 
-year <- 2021
+year <- 2022
 type <- "gas"
 varnameEx <- "vconfac"
 readOutputs2(year, type)

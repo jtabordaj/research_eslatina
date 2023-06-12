@@ -1,8 +1,8 @@
 source("./sui/dependencies.R")
 
-year <- 2021
+year <- 2022
 type <- "gas"
-readOutputs2(year, type)
+readOutputs3(year, type)
 
 merge_criteria <- c("Departamento", "Municipio")
 frameNames <- c("vconfac")
@@ -15,4 +15,5 @@ for(i in frameNames){
 
 df[, 1:2] <- lapply(df[, 1:2], as.factor)
 
-
+path <- paste("./sui/data/",type,"/",year,".xlsx", sep = "")
+write_xlsx(df, path)

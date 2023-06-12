@@ -55,6 +55,14 @@ readOutputs2 <- function(year, type){
     }
 }
 
+readOutputs3 <- function(year, type){
+    var <- c("sus", "tcon", "vconfac")
+    for(i in var){
+        path <- paste("./sui/data/",type,"/",year, "/output/", i,".xlsx", sep = "")
+        assign(paste(i,"_",year, sep=""), read_excel(path), envir=.GlobalEnv)
+    }
+}
+
 readCompFiles <- function(year, monthStart, monthEnd, type, variable){
     for(i in monthStart:monthEnd){
         path <- paste("./sui/data/",type,"/",year,"/",variable,"/compiled/compile",i,".xlsx", sep = "")
