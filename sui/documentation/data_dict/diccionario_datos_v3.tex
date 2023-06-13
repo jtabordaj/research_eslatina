@@ -59,21 +59,27 @@ Las bases de datos se componen de variables únicas, separadas según la fuente 
 
 \begin{enumerate}
 	\item Suscriptores (\textbf{sus}): Variable que reporta el total de usuarios en cada municipio.
-	\item Consumo (\textbf{con}): Variable que reporta el total de consumo en Kw/H por cada municipio.
-	\item Valor de consumo (\textbf{vcon}): Variable que reporta el valor en unidades monetarias de los Kw/H consumidos por cada municipio.
+	\item Consumo (\textbf{tcon}): Variable que reporta el total de consumo en $Kw/H$ por cada municipio.
+	\item Valor de consumo (\textbf{vcon}): Variable que reporta el valor en unidades monetarias de los $Kw/H$ consumidos por cada municipio.
 	\item Factura promedio (\textbf{pfac}): Variable que reporta el valor promedio en unidades monetarias de las facturas de energía eléctrica en cada municipio.
-	\item Consumo promedio (\textbf{pcon}): Variable que reporta el valor promedio en Kw/H del consumo de energía eléctrica en cada municipio.
-	\item Tarifa media (\textbf{ptar}): Variable que reporta el valor promedio en unidades monetarias de un Kw/H en cada municipio.
+	\item Consumo promedio (\textbf{pcon}): Variable que reporta el valor promedio en $Kw/H$ del consumo de energía eléctrica en cada municipio.
+	\item Tarifa media (\textbf{ptar}): Variable que reporta el valor promedio en unidades monetarias de un $Kw/H$ en cada municipio.
 	\item Total facturado (\textbf{fac}): Variable que reporta el total de unidades monetarias facturadas a los usuarios por el consumo de energía eléctrica en cada municipio.
-	
 \end{enumerate}
 
 \section{Gas Natural}
 
-WIP
+\begin{enumerate}
+	\item Suscriptores (\textbf{sus}): Variable que reporta el total de usuarios en cada municipio.
+	\item Consumo (\textbf{tcon}): Variable que reporta el total de consumo metros cúbicos ($M^3$) por cada municipio.
+	\item Valor de consumo (\textbf{vcon}): Variable que reporta el valor en unidades monetarias de los $M^3$ consumidos por cada municipio.
+	\item Total facturado (\textbf{fac}): Variable que reporta el total de unidades monetarias facturadas a los usuarios por el consumo de gas natural en cada municipio.
+\end{enumerate}
 
 
 \section*{Información Adicional}
+
+La diferencia entre total facturado (fac) y valor de consumo (vcon) reside en que el valor de consumo no considera subsidios o reducciones a la factura del usuario final, mientras que el total facturado reporta el recaudo de la entidad prestadora de servicio. La sustracción entre ambas variables puede indicar el valor subsidiado o descontado del usuario final.
 
 Para 2021, los siguientes municipios no cuentan con información para energía eléctrica:
 
@@ -87,7 +93,6 @@ Para 2021, los siguientes municipios no cuentan con información para energía e
 \end{table}
 
 Para 2022, los siguientes municipios no cuentan con información para energía eléctrica:
-
 
 \begin{longtable}{@{}lc@{}}
 	\toprule
@@ -150,7 +155,78 @@ Para 2022, los siguientes municipios no cuentan con información para energía e
 		PUTUMAYO              & SIBUNDOY             \\ \bottomrule
 \end{longtable}
 
-\pagebreak
+Para gas natural entre 2021 y 2022, hay municipios que no están presentes en ambas bases de datos:
+
+\begin{longtable}{@{}lc@{}}
+	\toprule
+	\multicolumn{1}{c}{\textbf{Departamento}} & \textbf{Municipio}  \\ \midrule
+		SANTANDER          & ARATOCA               \\
+		SANTANDER          & CAPITANEJO            \\
+		SANTANDER          & CHIMA                 \\
+		SANTANDER          & CIMITARRA             \\
+		SANTANDER          & CONFINES              \\
+		SANTANDER          & CONTRATACION          \\
+		SANTANDER          & COROMORO              \\
+		SANTANDER          & EL GUACAMAYO          \\
+		SANTANDER          & ENCINO                \\
+		SANTANDER          & ENCISO                \\
+		SANTANDER          & GUACA                 \\
+		SANTANDER          & GUADALUPE             \\
+		SANTANDER          & HATO                  \\
+		SANTANDER          & LANDAZURI             \\
+		SANTANDER          & LOS SANTOS            \\
+		SANTANDER          & MOGOTES               \\
+		SANTANDER          & OCAMONTE              \\
+		SANTANDER          & OIBA                  \\
+		SANTANDER          & PALMAR                \\
+		SANTANDER          & SAN ANDRES            \\
+		SANTANDER          & SAN JOAQUIN           \\
+		SANTANDER          & SANTA BARBARA         \\
+		SANTANDER          & SANTA HELENA DEL OPON \\
+		SANTANDER          & SIMACOTA              \\
+		CUNDINAMARCA       & CARMEN DE CARUPA      \\
+		CUNDINAMARCA       & GUTIERREZ             \\
+		CUNDINAMARCA       & SAN CAYETANO          \\
+		TOLIMA             & ANZOATEGUI            \\
+		TOLIMA             & ATACO                 \\
+		TOLIMA             & PLANADAS              \\
+		TOLIMA             & RONCESVALLES          \\
+		TOLIMA             & ROVIRA                \\
+		SUCRE              & GUARANDA              \\
+		HUILA              & ACEVEDO               \\
+		HUILA              & COLOMBIA              \\
+		HUILA              & ELIAS                 \\
+		HUILA              & IQUIRA                \\
+		HUILA              & ISNOS                 \\
+		HUILA              & LA ARGENTINA          \\
+		HUILA              & NATAGA                \\
+		HUILA              & OPORAPA               \\
+		HUILA              & PALESTINA             \\
+		HUILA              & SALADOBLANCO          \\
+		HUILA              & SANTA MARIA           \\
+		CHOCO              & EL CARMEN DE ATRATO   \\
+		NORTE DE SANTANDER & ARBOLEDAS             \\
+		NORTE DE SANTANDER & CACOTA                \\
+		NORTE DE SANTANDER & CUCUTILLA             \\
+		NORTE DE SANTANDER & SALAZAR               \\
+		NORTE DE SANTANDER & SANTIAGO              \\
+		CALDAS             & SAMANA                \\
+		ANTIOQUIA          & ANGOSTURA             \\
+		ANTIOQUIA          & ANORI                 \\
+		ANTIOQUIA          & CAMPAMENTO            \\
+		ANTIOQUIA          & EBEJICO               \\
+		ANTIOQUIA          & NECHI                 \\
+		BOYACA             & UMBITA                \\
+		BOYACA             & GAMEZA                \\
+		BOYACA             & MONGUA                \\
+		BOYACA             & MONGUI                \\
+		BOYACA             & TOPAGA                \\
+		BOYACA             & TOCA                  \\
+		CAUCA              & INZA                  \\
+		CAUCA              & PAEZ                  \\
+		CAQUETA            & EL PAUJIL             \\
+		CAQUETA            & SAN JOSE DEL FRAGUA   \\ \bottomrule
+\end{longtable}
 
 Todos los datos provienen del \textit{Sistema Único de Información de Servicios Públicos Domiciliarios} para 2021 y 2022. Para mas información, ver: \textbf{\href{http://sui.superservicios.gov.co/Reportes-del-sector/Energia/Reportes-comerciales/Consolidado-Energia-por-Empresa-Departamento-y-Municipio}{SUI}}.
 
