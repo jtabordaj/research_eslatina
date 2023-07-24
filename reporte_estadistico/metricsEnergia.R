@@ -12,22 +12,30 @@ dfList <- allDf[grep("^data_", allDf)]
 
 #### INPUT ####
 
-df <- data_fac
+dfName <- "data_vcon"
 
 #### INPUT ####
+df <- get(dfName)
 
 ## This mutate is optional and is used to divide large values (e.g billions)
-
-df <- df %>% mutate(across(3:10, ~ ./1000000))
-
 ## Check once in a while
 
-createMetrics(df, "mean")
+if(dfName == "data_fac"){
+    df <- df %>% mutate(across(3:10, ~ ./1000000))
+} else if(dfName == "data_pfac"){
+    df <- df %>% mutate(across(3:10, ~ ./1000))
+} else if(dfName == "data_tcon"){
+    df <- df %>% mutate(across(3:10, ~ ./1000))
+} else if(dfName == "data_vcon"){
+    df <- df %>% mutate(across(3:10, ~ ./1000000))
+}
+
+###
 
 initializeMetricsDF(df)
 colnames(metricsDF) <- c("name")
 metricsDF <- grabMetrics(df, metricsDF)
+summary(df)
 
-
-
+write_xlsx(metricsDF, paste("./reporte_estadistico/data/energia/metrics_",dfName,".xlsx", sep = ""))
 

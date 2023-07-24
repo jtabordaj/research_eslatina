@@ -50,13 +50,15 @@ createMetrics <- function(df, metric) {
             lowerCutoff <- quantile(df[,i], probs = 10/100, na.rm = TRUE)
             upperCutoff <- quantile(df[,i], probs = 1 - 10/100, na.rm = TRUE)
             trimmed_column <- df[df[, i] >= lowerCutoff & df[, i] <= upperCutoff, i]
-            calculatedMetric <- kurtosis(trimmed_column, na.rm = TRUE)
+            calculatedMetric <- skewness(trimmed_column, na.rm = TRUE)
             results[i - 2] <- paste(metric, "value of", colnames(df)[i], ":", calculatedMetric, sep = " ")
             row <- data.frame(name = colnames(df)[i], skewness = calculatedMetric)
         } else if(tolower(metric) == "quantiles"){
             calculatedMetric <- quantile(df[, i], na.rm = TRUE)
-            results[i - 2] <- paste(metric, "value of", colnames(df)[i], "in order from 0 to 100%:", calculatedMetric[1], calculatedMetric[2], calculatedMetric[3],calculatedMetric[4], metric0 = calculatedMetric[5], sep = " ")
+            results[i - 2] <- paste(metric, "value of", colnames(df)[i], "in order from 0 to 100%:", calculatedMetric[1], calculatedMetric[2], calculatedMetric[3],calculatedMetric[4], calculatedMetric[5], sep = " ")
             row <- data.frame(name = colnames(df)[i], quant0 = calculatedMetric[1], quant25 = calculatedMetric[2], quant50 = calculatedMetric[3], quant75 = calculatedMetric[4], quant100 = calculatedMetric[5])
+        } else {
+            stop("Check metric")
         }
         output <- rbind(output, row)
     }
