@@ -8,6 +8,7 @@ library(haven)
 library(purrr)
 library(ggpubr)
 library(moments)
+options(scipen = 999)
 
 varnames <- c("_fac", "_pcon", "_vcon", "_tcon", "_sus", "_ptar", "_pfac")
 
@@ -79,3 +80,33 @@ grabMetrics <- function(df, metricsDF) {
 }
 
 ## For kurtosis and skewness, the function drops lower 10 and upper 10
+
+ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, upperLim){
+    lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
+    upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
+    c <- ggplot(df, aes_string(x = column))
+    c + geom_density(kernel = "gaussian", color = "blue") +
+    ggtitle(title) +
+    labs(
+    title = title,
+    subtitle = subtitle) +
+    xlab(xLab) +
+    ylab(yLab) +
+    xlim(lowerLimit, upperLimit) +
+    theme_light() +
+    theme(axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5))
+}
+
+ggpDensities <- function(data, var, title, subtitle, xLab, yLab, lowerLim, upperLim){
+    E1 <- ggpDensity(data, paste('Estrato1',var, sep = ""), paste(title, "Estrato 1", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E2 <- ggpDensity(data, paste('Estrato2',var, sep = ""), paste(title, "Estrato 2", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E3 <- ggpDensity(data, paste('Estrato3',var, sep = ""), paste(title, "Estrato 3", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E4 <- ggpDensity(data, paste('Estrato4',var, sep = ""), paste(title, "Estrato 4", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E5 <- ggpDensity(data, paste('Estrato5',var, sep = ""), paste(title, "Estrato 5", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E6 <- ggpDensity(data, paste('Estrato6',var, sep = ""), paste(title, "Estrato 6", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    totR <- ggpDensity(data, paste('totResidencial',var, sep = ""), paste(title, "Consumidores residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    totNR <- ggpDensity(data, paste('totNoResidencial',var, sep = ""), paste(title, "Consumidores no residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    return(list(E1 = E1, E2 = E2, E3 = E3, E4 = E4, E5 = E5, E6 = E6, RES = totR, NORES = totNR))
+}

@@ -9,11 +9,24 @@ spliceVariables(data21)
 allDf <- ls()
 dfList <- allDf[grep("^data_", allDf)]
 
-createMetrics(data_fac, "mean")
 
-initializeMetricsDF(data_fac)
+#### INPUT ####
+
+df <- data_fac
+
+#### INPUT ####
+
+## This mutate is optional and is used to divide large values (e.g billions)
+
+df <- df %>% mutate(across(3:10, ~ ./1000000))
+
+## Check once in a while
+
+createMetrics(df, "mean")
+
+initializeMetricsDF(df)
 colnames(metricsDF) <- c("name")
-metricsDF <- grabMetrics(data_fac, metricsDF)
+metricsDF <- grabMetrics(df, metricsDF)
 
 
 
