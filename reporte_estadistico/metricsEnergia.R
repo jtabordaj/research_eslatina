@@ -12,7 +12,7 @@ dfList <- allDf[grep("^data_", allDf)]
 
 #### INPUT ####
 
-dfName <- "data_sus"
+dfName <- "data_vcon"
 
 #### INPUT ####
 df <- get(dfName)
