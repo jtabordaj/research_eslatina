@@ -87,7 +87,7 @@ ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, uppe
     lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
     upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
     c <- ggplot(df, aes_string(x = column))
-    c + geom_density(kernel = "gaussian", color = "blue") +
+    c + geom_density(kernel = "gaussian", color = "#5200f6", fill = "#5200f6") +
     ggtitle(title) +
     labs(
     title = title,
@@ -95,10 +95,15 @@ ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, uppe
     xlab(xLab) +
     ylab(yLab) +
     xlim(lowerLimit, upperLimit) +
-    theme_light() +
-    theme(axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = 0.5))
+    theme_light()+
+    theme(
+        plot.background = element_rect(fill = "white"),
+        panel.border = element_rect(color = "black", fill = NA),
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14,),
+        plot.title = element_text(size = 18, hjust = 0.5)
+    ) 
 }
 
 ggpDensities <- function(data, var, title, subtitle, xLab, yLab, lowerLim, upperLim){
@@ -110,5 +115,39 @@ ggpDensities <- function(data, var, title, subtitle, xLab, yLab, lowerLim, upper
     E6 <- ggpDensity(data, paste('Estrato6',var, sep = ""), paste(title, "Estrato 6", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
     totR <- ggpDensity(data, paste('totResidencial',var, sep = ""), paste(title, "Consumidores residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
     totNR <- ggpDensity(data, paste('totNoResidencial',var, sep = ""), paste(title, "Consumidores no residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    return(list(E1 = E1, E2 = E2, E3 = E3, E4 = E4, E5 = E5, E6 = E6, RES = totR, NORES = totNR))
+}
+
+ggpBoxplot <- function(data, column, title, subtitle, xLab, yLab, lowerLim, upperLim){
+    lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
+    upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
+    c <- ggplot(df, aes_string(x = column))
+    c + geom_boxplot(color = "#0077ff", fill = "#0077ff") + ggtitle(title) +
+    labs(
+    title = title,
+    subtitle = subtitle) +
+    xlab(xLab) +
+    ylab(yLab) +
+    xlim(lowerLimit, upperLimit) +
+    theme_light()+
+    theme(
+        plot.background = element_rect(fill = "white"),
+        panel.border = element_rect(color = "black", fill = NA),
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14,),
+        plot.title = element_text(size = 18, hjust = 0.5)
+    ) 
+}
+
+ggpBoxplots <- function(data, var, title, subtitle, xLab, yLab, lowerLim, upperLim){
+    E1 <- ggpBoxplot(data, paste('Estrato1',var, sep = ""), paste(title, "Estrato 1", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E2 <- ggpBoxplot(data, paste('Estrato2',var, sep = ""), paste(title, "Estrato 2", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E3 <- ggpBoxplot(data, paste('Estrato3',var, sep = ""), paste(title, "Estrato 3", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E4 <- ggpBoxplot(data, paste('Estrato4',var, sep = ""), paste(title, "Estrato 4", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E5 <- ggpBoxplot(data, paste('Estrato5',var, sep = ""), paste(title, "Estrato 5", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    E6 <- ggpBoxplot(data, paste('Estrato6',var, sep = ""), paste(title, "Estrato 6", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    totR <- ggpBoxplot(data, paste('totResidencial',var, sep = ""), paste(title, "Consumidores residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
+    totNR <- ggpBoxplot(data, paste('totNoResidencial',var, sep = ""), paste(title, "Consumidores no residenciales", sep = " "), subtitle, xLab, yLab, lowerLim, upperLim)
     return(list(E1 = E1, E2 = E2, E3 = E3, E4 = E4, E5 = E5, E6 = E6, RES = totR, NORES = totNR))
 }

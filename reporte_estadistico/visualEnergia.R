@@ -3,7 +3,7 @@ source("./reporte_estadistico/metricsEnergia.R")
 
 ## One variable
 
-output <- ggpDensities(df, "_pcon", "", "", "Total Facturado", "Densidad", 0.1, 0.9)
+output <- ggpDensities(df, "_ptar", "", "", "Valor kW/h", "Densidad", 0.1, 0.9)
 
 E1 <- output$E1
 E2 <- output$E2

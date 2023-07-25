@@ -12,7 +12,7 @@ dfList <- allDf[grep("^data_", allDf)]
 
 #### INPUT ####
 
-dfName <- "data_vcon"
+dfName <- "data_sus"
 
 #### INPUT ####
 df <- get(dfName)
@@ -37,5 +37,10 @@ colnames(metricsDF) <- c("name")
 metricsDF <- grabMetrics(df, metricsDF)
 summary(df)
 
-write_xlsx(metricsDF, paste("./reporte_estadistico/data/energia/metrics_",dfName,".xlsx", sep = ""))
+doWrite <- FALSE
+if(doWrite == TRUE){
+    write_xlsx(metricsDF, paste("./reporte_estadistico/data/energia/metrics_",dfName,".xlsx", sep = ""))
+} else {
+   warning("Write signal is set to false")
+}
 
