@@ -5,14 +5,14 @@ source("./reporte_estadistico/dependencies.R")
 data21 <- read_xlsx('./reporte_estadistico/data/energia/2021_fulldb.xlsx')
 data22 <- read_xlsx('./reporte_estadistico/data/energia/2022_fulldb.xlsx')
 
-spliceVariables(data21)
+spliceVariables(data22)
 allDf <- ls()
 dfList <- allDf[grep("^data_", allDf)]
 
 
 #### INPUT ####
 
-dfName <- "data_vcon"
+dfName <- "data_tcon"
 
 #### INPUT ####
 df <- get(dfName)
@@ -35,6 +35,7 @@ if(dfName == "data_fac"){
 initializeMetricsDF(df)
 colnames(metricsDF) <- c("name")
 metricsDF <- grabMetrics(df, metricsDF)
+View(metricsDF)
 summary(df)
 
 doWrite <- FALSE

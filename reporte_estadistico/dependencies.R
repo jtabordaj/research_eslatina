@@ -87,7 +87,7 @@ ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, uppe
     lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
     upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
     c <- ggplot(df, aes_string(x = column))
-    c + geom_density(kernel = "gaussian", color = "cyan3", fill = "cyan3") +
+    c + geom_density(kernel = "gaussian", color = "#4404a2", fill = "#4404a2") +
     ggtitle(title) +
     labs(
     title = title,
@@ -122,7 +122,7 @@ ggpBoxplot <- function(data, column, title, subtitle, xLab, yLab, lowerLim, uppe
     lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
     upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
     c <- ggplot(df, aes_string(x = column))
-    c + geom_boxplot(color = "#0077ff", fill = "#0077ff") + ggtitle(title) +
+    c + geom_boxplot(color = "#6600ff", fill = "#6600ff") + ggtitle(title) +
     labs(
     title = title,
     subtitle = subtitle) +
