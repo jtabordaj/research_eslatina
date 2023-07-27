@@ -87,7 +87,7 @@ ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, uppe
     lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
     upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
     c <- ggplot(df, aes_string(x = column))
-    c + geom_density(kernel = "gaussian", color = "#4404a2", fill = "#4404a2") +
+    c + geom_density(kernel = "gaussian", color = "cyan3", fill = "cyan3") +
     ggtitle(title) +
     labs(
     title = title,
