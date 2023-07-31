@@ -16,4 +16,12 @@ ggarrange(
     E1, E2, E3,
     E4, E5, E6,
     ncol = 2, nrow = 3,
-    margin = c(0.5, 0.5))
+    margin = c(0.5, 0.5)
+)
+
+diffe(1146, 1100)
+diffe(1777, 1714)
+diffe(997, 934)
+diffe(384, 347)
+diffe(168, 151)
+diffe(151, 135)

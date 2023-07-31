@@ -5,7 +5,7 @@ source("./reporte_estadistico/gas/dependencies.R")
 data21 <- read_xlsx('./reporte_estadistico/data/gas/2021_fulldb.xlsx')
 data22 <- read_xlsx('./reporte_estadistico/data/gas/2022_fulldb.xlsx')
 
-spliceVariables(data21)
+spliceVariables(data22)
 allDf <- ls()
 dfList <- allDf[grep("^data_", allDf)]
 
@@ -21,7 +21,7 @@ df <- get(dfName)
 ## Check once in a while
 
 if(dfName == "data_fac"){
-    df <- df %>% mutate(across(3:9, ~ ./1000000))
+    df <- df %>% mutate(across(3:3, ~ ./1000000))
 } else if(dfName == "data_pfac"){
     df <- df %>% mutate(across(3:9, ~ ./1000))
 } else if(dfName == "data_tcon"){
@@ -30,6 +30,9 @@ if(dfName == "data_fac"){
     df <- df %>% mutate(across(3:9, ~ ./1000000))
 }
 
+if(dfName == "data_fac"){
+    summary(df)
+}
 
 ###
 
@@ -39,7 +42,7 @@ metricsDF <- grabMetrics(df, metricsDF)
 View(metricsDF)
 summary(df)
 
-doWrite <- TRUE
+doWrite <- FALSE
 if(doWrite == TRUE){
     write_xlsx(metricsDF, paste("./reporte_estadistico/data/gas/metrics_",dfName,".xlsx", sep = ""))
 } else {

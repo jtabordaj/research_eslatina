@@ -81,13 +81,17 @@ grabMetrics <- function(df, metricsDF) {
   return(metricsDF)  
 }
 
+diffe <- function(final, initial){
+    ((final-initial)/initial)*100
+}
+
 ## For kurtosis and skewness, the function drops lower 10 and upper 10
 
 ggpDensity <- function(data, column, title, subtitle, xLab, yLab, lowerLim, upperLim){
     lowerLimit <- quantile(data[[column]], lowerLim, na.rm = TRUE)
     upperLimit <- quantile(data[[column]], upperLim, na.rm = TRUE) 
     c <- ggplot(df, aes_string(x = column))
-    c + geom_density(kernel = "gaussian", color = "#0088ff", fill = "#0088ff") +
+    c + geom_density(kernel = "gaussian", color = "#0a00cd", fill = "#0a00cd") +
     ggtitle(title) +
     labs(
     title = title,
