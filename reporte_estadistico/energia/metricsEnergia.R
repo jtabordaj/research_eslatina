@@ -1,4 +1,4 @@
-source("./reporte_estadistico/dependencies.R")
+source("./reporte_estadistico/energia/dependencies.R")
 
 # Energia
 

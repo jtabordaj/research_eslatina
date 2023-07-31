@@ -1,9 +1,9 @@
-source("./reporte_estadistico/dependencies.R")
-source("./reporte_estadistico/metricsEnergia.R")
+source("./reporte_estadistico/gas/dependencies.R")
+source("./reporte_estadistico/gas/metricsGas.R")
 
 ## One variable
 
-output <- ggpDensities(df, "_vcon", "", "", "Valor consumo total de kW/h", "Densidad", 0.1, 0.9)
+output <- ggpDensities(df, "_vcon", "", "", "Valor consumo total de M3", "Densidad", 0.1, 0.9)
 
 E1 <- output$E1
 E2 <- output$E2
