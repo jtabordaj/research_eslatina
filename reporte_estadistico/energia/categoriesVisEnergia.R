@@ -4,8 +4,8 @@ source("./reporte_estadistico/energia/categoriesEnergia.R")
 # varnames <- c("_fac", "_pcon", "_vcon", "_tcon", "_sus", "_ptar", "_pfac")
 # sus tcon vcon fac pcon pfac ptar
 
-dfName <- "data_ptar"
-dfSuffix <- "_ptar"
+dfName <- "data_pfac"
+dfSuffix <- "_pfac"
 
 if(dfSuffix == "_vcon"){
     xlab <- "Valor consumo total de kW/h"
@@ -57,7 +57,7 @@ output <- ggpDensities(df,
     dfSuffix, 
     "", "", 
     xlab, "Densidad", 
-    0.05, 0.95, "#100a86"
+    0.05, 0.95, "#003052"
 )
 
 E1 <- output$E1
