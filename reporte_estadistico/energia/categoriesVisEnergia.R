@@ -44,7 +44,7 @@ colnames(metricsDF) <- c("name")
 metricsDF <- grabMetrics(df, metricsDF)
 View(metricsDF)
 
-doWrite <- TRUE
+doWrite <- FALSE
 if(doWrite == TRUE){
     write_xlsx(metricsDF, paste("./reporte_estadistico/data/energia/metrics_",dfName,".xlsx", sep = ""))
 } else {
