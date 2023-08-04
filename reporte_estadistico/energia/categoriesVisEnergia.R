@@ -57,7 +57,7 @@ output <- ggpDensities(df,
     dfSuffix, 
     "", "", 
     xlab, "Densidad", 
-    0.05, 0.95, "#6406c3"
+    0.05, 0.95, "#8a6ef9"
 )
 
 E1 <- output$E1
@@ -73,3 +73,5 @@ ggarrange(
     ncol = 2, nrow = 3,
     margin = c(0.5, 0.5))
 summary(df)
+
+
