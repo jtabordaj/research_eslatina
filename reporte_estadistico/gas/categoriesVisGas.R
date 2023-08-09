@@ -5,8 +5,8 @@ source("./reporte_estadistico/gas/categoriesGas.R")
 # sus tcon vcon 
 # fac esta solo consolidado por total residencial
 
-dfName <- "data_sus"
-dfSuffix <- "_sus"
+dfName <- "data_vcon"
+dfSuffix <- "_vcon"
 
 if(dfSuffix == "_vcon"){
     xlab <- "Valor consumo total de M3"
@@ -41,9 +41,9 @@ colnames(metricsDF) <- c("name")
 metricsDF <- grabMetrics(df, metricsDF)
 View(metricsDF)
 
-doWrite <- FALSE
+doWrite <- TRUE
 if(doWrite == TRUE){
-    write_xlsx(metricsDF, paste("./reporte_estadistico/data/energia/metrics_",dfName,".xlsx", sep = ""))
+    write_xlsx(metricsDF, paste("./reporte_estadistico/data/gas/metrics_",dfName,".xlsx", sep = ""))
 } else {
    warning("Write signal is set to false")
 }
@@ -54,7 +54,7 @@ output <- ggpDensities(df,
     dfSuffix, 
     "", "", 
     xlab, "Densidad", 
-    0.05, 0.95, "#50a2ff"
+    0.05, 0.95, "#a001e9"
 )
 
 E1 <- output$E1
