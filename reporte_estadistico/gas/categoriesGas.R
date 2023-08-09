@@ -5,7 +5,7 @@ source("./reporte_estadistico/gas/dependencies.R")
 data21 <- read_xlsx('./reporte_estadistico/data/gas/2021_fulldb.xlsx')
 data22 <- read_xlsx('./reporte_estadistico/data/gas/2022_fulldb.xlsx')
 
-data <- data21
+data <- data22
     quartiles <- data.frame(quart = quantile(data$totResidencial_sus, probs = c(0.2, 0.4, 0.6, 0.8)))
     data <- data %>% mutate(cat1_sus = ifelse(totResidencial_sus <= quartiles[1,1], 1, 0))
     data <- data %>% mutate(cat2_sus = ifelse(totResidencial_sus > quartiles[1,1] & totResidencial_sus <= quartiles[2,1], 1, 0))
@@ -26,4 +26,4 @@ dfList <- allDf[grep("^data_", allDf)]
 
 #### INPUT ####
 
-spliceVariables(subset5)
+spliceVariables(subset3)
