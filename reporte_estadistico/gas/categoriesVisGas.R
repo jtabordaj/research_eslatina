@@ -54,7 +54,7 @@ output <- ggpDensities(df,
     dfSuffix, 
     "", "", 
     xlab, "Densidad", 
-    0.05, 0.95, "#4f0df7"
+    0.05, 0.95, "#7ac5fb"
 )
 
 E1 <- output$E1
