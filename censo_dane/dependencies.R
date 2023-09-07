@@ -46,3 +46,5 @@ divipolaFilter <- function(divipola){
         stop("Either Divipola of 08 or 13")
     }
 }
+
+mergeCriteria <- c("U_DPTO", "U_MPIO", "UA_CLASE", "COD_ENCUESTAS", )

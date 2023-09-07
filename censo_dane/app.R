@@ -10,6 +10,7 @@ dfsEnvir <- envir[sapply(envir, function(x) is.data.frame(get(x)))]
 
 divipolaFilter(divipola)
 
-
+# df <- get(dfsEnvir[1])
+# df <- df %>% inner_join(df, get(dfsEnvir[2]), by = mergeCriteria)
 
 
