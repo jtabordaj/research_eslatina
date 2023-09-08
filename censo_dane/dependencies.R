@@ -47,4 +47,12 @@ divipolaFilter <- function(divipola){
     }
 }
 
-mergeCriteria <- c("U_DPTO", "U_MPIO", "UA_CLASE", "COD_ENCUESTAS", )
+# Merge criteria for
+# Fallecidos: U_DPTO, U_MPIO, UA_CLASE, COD_ENCUESTAS, U_VIVIENDA, F_NRHOG, FA1_NRO_FALL
+# Persona: U_DPTO, U_MPIO, UA_CLASE, COD_ENCUESTAS, U_VIVIENDA, P_NRHOG, P_NRO_PER
+# Hogar: U_DPTO, U_MPIO, UA_CLASE, COD_ENCUESTAS, U_VIVIENDA, H_NRHOG
+# Vivienda: U_DPTO, U_MPIO, UA_CLASE, COD_ENCUESTAS, U_VIVIENDA, P_NRHOG, U_EDIFICA
+
+## Vivienda puede tener varios hogares, hogares pueden tener varias personas
+
+mergeCriteria <- c("U_DPTO", "U_MPIO", "UA_CLASE", "COD_ENCUESTAS", "U_VIVIENDA",  )
