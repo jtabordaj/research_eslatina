@@ -25,4 +25,4 @@ source("./censo_dane/vivienda.R")
 
 # Join
 
-data <- inner_join(vivienda, personas, by = c("COD_ENCUESTAS", "U_DPTO", "U_MPIO"))
+data <- inner_join(vivienda, personas, by = c("COD_ENCUESTAS", "U_DPTO", "U_MPIO", "U_VIVIENDA"))
