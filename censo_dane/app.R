@@ -8,9 +8,21 @@ readFiles(divipola)
 envir <- ls()
 dfsEnvir <- envir[sapply(envir, function(x) is.data.frame(get(x)))]
 
+# Cambios
+
+for (i in dfsEnvir) {
+  df <- get(i)
+    df <- df[, !colnames(df) %in% "TIPO_REG", drop = FALSE]
+    df <- df[, !colnames(df) %in% "UA_CLASE", drop = FALSE]
+    assign(i, df, envir = .GlobalEnv)
+}
+
 divipolaFilter(divipola)
 
-# df <- get(dfsEnvir[1])
-# df <- df %>% inner_join(df, get(dfsEnvir[2]), by = mergeCriteria)
+# DF Modules
+source("./censo_dane/personas.R")
+source("./censo_dane/vivienda.R")
 
+# Join
 
+data <- inner_join(vivienda, personas, by = c("COD_ENCUESTAS", "U_DPTO", "U_MPIO"))
