@@ -31,6 +31,7 @@ personas <- personas %>% mutate(nivelEducativo = ifelse(P_NIVEL_ANOSR == 1 | P_N
     ifelse(P_NIVEL_ANOSR == 7 | P_NIVEL_ANOSR == 8, 3, 
     ifelse(P_NIVEL_ANOSR == 9, 4, 0))))
 ) # 1 = Primaria, 2 = Bachillerato/Normal, 3 = Educacion Superior, 4 = Posgrado, 0 = No tiene/No Informa/Otros
+personas <- personas %>% mutate(asisteClase = ifelse(PA_ASISTENCIA == 1, 1, 0)) # 1 = Esta asistiendo a clases ya sea virtual o presencial
 
 personas <- personas %>% mutate(actividadReciente = P_TRABAJO) # Mantiene categorias DANE
 
@@ -40,7 +41,7 @@ personas <- personas %>% mutate(tuvoHijos = ifelse(PA_HNV == 1, 1, 0)) # 1 = Ha 
 
 
 personas <- personas %>% select(U_DPTO, U_MPIO, COD_ENCUESTAS, U_VIVIENDA, P_NROHOG, P_NRO_PER, esMujer, grupoEdad, 
-noGrupoEtnico, geIndigena, geGitano, geRaizal, gePalenquero, geAfro, lugarNacimiento, seEnfermo, atencionMedica, fueAtendido, calidadSevicio, problemasFisicos, esAlfabeta, 
-nivelEducativo, actividadReciente, estadoCivil, tuvoHijos)
+noGrupoEtnico, geIndigena, geGitano, geRaizal, gePalenquero, geAfro, lugarNacimiento, seEnfermo, atencionMedica, fueAtendido, 
+calidadSevicio, problemasFisicos, esAlfabeta, nivelEducativo, asisteClase, actividadReciente, estadoCivil, tuvoHijos)
 
 personas[is.na(personas)] <- 0

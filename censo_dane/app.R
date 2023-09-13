@@ -27,7 +27,7 @@ source("./censo_dane/vivienda.R")
 data <- inner_join(vivienda, personas, by = c("COD_ENCUESTAS", "U_DPTO", "U_MPIO", "U_VIVIENDA"))
 
 # Export
-canWrite <- FALSE
+canWrite <- TRUE
 
 if(canWrite == TRUE){
   wPath <- paste("./censo_dane/data/cnpv",divipola,".xlsx", sep = "")
