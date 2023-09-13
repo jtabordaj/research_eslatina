@@ -1,0 +1,224 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath}				% For use of  a large range of formulas, commands, and symbols
+\usepackage[utf8]{inputenc}			% Specifies the encoding. (Zeichenkodierung, bindet Sonderzeichen mit ein)
+\usepackage[T1]{fontenc}			% Include the accented characters as individual glyphs(ö is one single glyph, not an o with an added accent)
+\usepackage[spanish]{babel}			% Specifies the language of doucment (translates "Table of Contents"...)
+\usepackage{graphicx}				% For including graphics
+\graphicspath{{images}}
+\usepackage{subfigure}				% For including "sub"figures
+\usepackage{lscape}					% Rotates text within environment by 90 degrees.
+\usepackage{pst-plot, pstricks}		% plot­ting of data (typ­i­cally from ex­ter­nal files), plotting lines, rectangles...
+\usepackage{fancybox,amssymb,color}	% fancybox: frames, rotations - amssymb: extension for amsmath - color: set the font color, text background, or page
+\usepackage{setspace}				% allows to specifiy the space between lines
+\usepackage{booktabs} 				% For prettier tables
+\onehalfspacing
+\pagestyle{plain}
+\usepackage{enumerate}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{1ex}
+\usepackage{geometry}   		 % definition of the page layout
+\geometry{
+	a4paper,					 % format
+	left=30mm,					 % left margin
+	right=30mm,					 % right margin
+	top=25mm,					 % distance upwards
+	bottom=25mm,				 % distance downwards
+	includehead,				 % distance from upwards till the page header
+}
+\usepackage{booktabs}
+\usepackage{longtable}	
+\usepackage{adjustbox}	
+\usepackage{multirow}		
+\usepackage{float}	
+
+
+\begin{document}
+
+\begin{center}
+	\textbf{Diccionario de Datos} \\
+	Ultima vez editado: \today
+\end{center}
+\vspace{10mm}
+
+\textbf{Nivel de desagregación de los datos}
+\begin{enumerate}
+	\item A nivel vivienda: U\_VIVIENDA
+	\item A nivel hogar: U\_VIVIENDA + P\_NROHOG
+	\item A nivel persona: U\_VIVIENDA + P\_NROHOG + P\_NRO\_PER
+\end{enumerate}
+
+Una vivienda puede tener múltiples hogares. Se entiende el hogar como una persona o grupo de personas que ocupan la totalidad o parte de una vivienda y que se han asociado para compartir espacio, comida, descanso, etcétera... Los datos están desagregados al nivel de \textbf{PERSONA}.
+	
+Las bases de datos se componen de 32 variables:
+
+\section{Características de vivienda}
+\begin{enumerate}
+	\item \textbf{tipoVivienda}: Variable categórica que reporta el tipo de vivienda en el que reside la persona.
+		\begin{enumerate}
+			\item 0: No se registra
+			\item 1: Casa
+			\item 2: Apartamento
+			\item 3: Tipo cuarto
+			\item 4: Vivienda tradicional Indigena
+			\item 5: Vivienda tradicional Etnica (Afrocolombiana, Isleña, Rrom)
+			\item 6: Otro (contenedor, carpa, embarcacion, vagon, cueva, refugio natural, etc.) 
+		\end{enumerate}
+	\item \textbf{totalHogares}: Variable continua que indica cuantos hogares hay en una vivienda
+	\item \textbf{materialPared}: Variable categórica que reporta el tipo de pared que tiene la vivienda en la que reside la persona.
+		\begin{enumerate}
+			\item 0: No se registra
+			\item 1: Bloque, ladrillo, piedra, madera pulida
+			\item 2: Concreto vaciado
+			\item 3: Material prefabricado
+			\item 4: Guadua
+			\item 5: Tapia pisada, bahareque, adobe
+			\item 6: Madera burda, tabla, tablón
+			\item 7: Caña, esterilla, otros vegetales
+			\item 8: Materiales de deshecho (Zinc, tela, cartón, latas, plásticos, otros)
+			\item 9: No tiene paredes
+		\end{enumerate}
+	\item \textbf{materialPiso}: Variable categórica que reporta el tipo de piso que tiene la vivienda en la que reside la persona.
+		\begin{enumerate}
+			\item 0: No se registra
+			\item 1: Marmol, parque, madera pulida y lacada
+			\item 2: Baldosa, vinilo, tableta, ladrillo, laminado
+			\item 3: Alfombra
+			\item 4: Cemento, gravilla
+			\item 5: Madera burda, tabla, tablon, otro vegetal
+			\item 6: Tierra, arena, barro
+		\end{enumerate}
+	\item \textbf{tieneEnergia}: Variable binaria. 1 si la vivienda donde reside la persona tiene energía eléctrica conectado a red pública
+	\item \textbf{estratoEE}: Variable continua que indica el estrato de la vivienda según el recibo de energía eléctrica. Toma valor de 0 si no aplica o no se registra.
+	\item \textbf{tieneAcueducto}: Variable binaria. 1 si la vivienda donde reside la persona tiene acueducto
+	\item \textbf{tieneAlcantarillado}: Variable binaria. 1 si la vivienda donde reside la persona tiene alcantarillado
+	\item \textbf{tieneGas}: Variable binaria. 1 si la vivienda donde reside la persona tiene gas natural conectado a red pública
+	\item \textbf{tieneServBasuras}: Variable binaria. 1 si la vivienda donde reside la persona tiene servicio de basuras
+	\item \textbf{tieneInternet}: Variable binaria. 1 si la vivienda donde reside la persona tiene servicio de internet
+	\item \textbf{tipoSSanitario}: Variable categorica que reporta el tipo de servicio sanitario que tiene la vivienda en la que reside la persona.
+		\begin{itemize}
+			\item 1 Inodoro conectado al alcantarillado
+			\item 2 Inodoro conectado a pozo séptico
+			\item 3 Inodoro sin conexión
+			\item 4 Letrina
+			\item 5 Inodoro con descarga directa a fuentes de agua (bajamar)
+			\item 6 Esta vivienda no tiene servicio sanitario
+		\end{itemize}
+	
+\end{enumerate}
+
+\section{Características de persona}
+
+\begin{enumerate}
+	\item \textbf{esMujer}: Variable binaria. 1 si la persona es mujer.
+	\item \textbf{grupoEdad}: Variable categorica que separa la edad de la persona en grupos quinquenales:
+		\begin{enumerate}
+			\item 1: de 00 A 04 Años
+			\item 2: de 05 A 09 Años
+			\item 3: de 10 A 14 Años
+			\item 4: de 15 A 19 Años
+			\item 5: de 20 A 24 Años
+			\item 6: de 25 A 29 Años
+			\item 7: de 30 A 34 Años
+			\item 8: de 35 A 39 Años
+			\item 9: de 40 A 44 Años
+			\item 10: de 45 A 49 Años
+			\item 11: de 50 A 54 Años
+			\item 12: de 55 A 59 Años
+			\item 13: de 60 A 64 Años
+			\item 14: de 65 A 69 Años
+			\item 15: de 70 A 74 Años
+			\item 16: de 75 A 79 Años
+			\item 17: de 80 A 84 Años
+			\item 18: de 85 A 89 Años
+			\item 19: de 90 A 94 Años
+			\item 20: de 95 A 99 Años
+			\item 21: de 100 y más Años
+		\end{enumerate}
+	\item \textbf{geIndigena}: Variable binaria. 1 si la persona se identifica como indígena.
+	\item \textbf{geGitano}: Variable binaria. 1 si la persona se identifica como gitano.
+	\item \textbf{geRaizal}: Variable binaria. 1 si la persona se identifica como raizal.
+	\item \textbf{gePalenquero}: Variable binaria. 1 si la persona se identifica como palenquero.
+	\item \textbf{geAfro}: Variable binaria. 1 si la persona se identifica como afrodescendiente.
+	\item \textbf{noGrupoEtnico}: Variable binaria. 1 si la persona no se identifica con ningún grupo étnico descrito anteriormente
+	\item \textbf{lugarNacimiento}: Variable categórica que captura el lugar de nacimiento de la persona.
+		\begin{enumerate}
+			\item 1: En este mpio
+			\item 2: En otro mpio Colombiano
+			\item 3: En otro país
+			\item 9: No Informa o No aplica
+		\end{enumerate}
+	\item \textbf{seEnfermo}: Variable binaria. 1 si en los últimos 30 días calendario la persona se enfermo. 
+	\item \textbf{atencionMedica}: Variable categórica que especifica el tipo de atención medica recibida.
+		\begin{enumerate}
+			\item 1: Acudió a la entidad de seguridad social en salud de la cual es filiado(a)?
+			\item 2: Acudió a un médico particular? (general, especialista, odontólogo, terapeuta u otro)
+			\item 3: Acudió a un boticario, farmacéuta, droguista?
+			\item 4: Asistió a terapias alternativas? (acupuntura, esencias florales, musicoterapias, homeópata, etc.)
+			\item 5: Acudió a una autoridad indígena espiritual?
+			\item 6: Acudió a otro médico de un grupo étnico? (curandero, yerbatero, etc.)
+			\item 7: Usó remedios caseros?
+			\item 8: Se autorrecetó
+			\item 9: No hizo nada
+			\item 99: No Informa o No Aplica
+		\end{enumerate}
+	\item \textbf{fueAtendido}: Variable binaria. 1 si la persona recibió atención al problema de salud.
+	\item \textbf{calidadSevicio}: Variable categorica que especifica la calidad de la prestación del servicio de salud.
+		\begin{enumerate}
+			\item 1: Muy bueno
+			\item 2: Bueno
+			\item 3: Malo
+			\item 4: Muy Malo
+			\item 9: No Informa o No Aplica
+		\end{enumerate}
+	\item \textbf{problemasFisicos}: Variable binaria. 1 si la persona tiene alguna dificultad física en su vida diaria
+	\item \textbf{esAlfabeta}: Variable binaria. 1 si la persona sabe leer y escribir.
+	\item \textbf{nivelEducativo}: Variable categórica que especifica el nivel educativo más alto alcanzado y último año o grado aprobado en ese nivel.
+		\begin{enumerate}
+			\item 1: Primaria
+			\item 2: Bachillerato/Normal 
+			\item 3: Educación Superior
+			\item 4: Posgrado 
+			\item 0: No tiene/No Informa/Otros
+		\end{enumerate}
+	\item \textbf{asisteClase}: Variable binaria. 1 si la persona está asistiendo a clases, ya sea virtual o presencial.
+	\item \textbf{actividadReciente}: Variable categórica que especifica qué hizo la persona durante la semana pasada.
+		\begin{enumerate}
+			\item 1: Trabajó por lo menos una hora en una actividad que le generó algún ingreso?
+			\item 2: Trabajó o ayudó en un negocio por lo menos una hora sin que le pagaran?
+			\item 3: No trabajó, pero tenía un empleo, trabajo o negocio por el que recibe ingresos?
+			\item 4: Busco trabajo?
+			\item 5: Vivió de jubilación, pensión o renta?
+			\item 6: Estudió?
+			\item 7: Realizó oficios del hogar?
+			\item 8: Está incapacitado(a) permanentemente para trabajar?
+			\item 9: Estuvo en otra situación?
+			\item 0: No informa o no aplica
+		\end{enumerate}
+	\item \textbf{estadoCivil}: Variable categórica que especifica el estado civil de la persona.
+		\begin{enumerate}
+			\item 1: Unión libre?
+			\item 2: Casado(a)?
+			\item 3: Divorciado(a)?
+			\item 4: Separado(a) de unión libre?
+			\item 5: Separado(a) de matrimonio?
+			\item 6: Viudo(a)?
+			\item 7: Soltero(a)?(Nunca se ha casado, ni ha vivido en unión libre)
+			\item 9: No Informa o No Aplica
+		\end{enumerate}
+	\item \textbf{tuvoHijos}: Variable binaria. 1 si la persona ha tenido algún hijo(a) nacido vivo(a)
+\end{enumerate}
+
+\section*{Información Adicional}
+
+
+Todos los datos provienen del \textbf{Censo Nacional de Población y Vivienda} (CNPV) del DANE para 2018. Lo puede consultar \href{https://microdatos.dane.gov.co/index.php/catalog/643/study-description}{\textbf{aquí}}
+
+\vfill
+
+\noindent Contacto: \href{mailto:jtabordaj@uninorte.edu.co}{jtabordaj@uninorte.edu.co} \\
+Repositorio: \textbf{\href{https://github.com/jtabordaj/research_eslatina}{GitHub}}
+
+
+\end{document}

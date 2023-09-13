@@ -5,6 +5,7 @@ source("./censo_dane/dependencies.R")
 vivienda <- get(dfsEnvir[5])
 
 vivienda <- vivienda %>% mutate(tipoVivienda = V_TIPO_VIV) # Mantiene categoria DANE, 0 ruta para valores no registrados/otros
+vivienda <- vivienda %>% mutate(totalHogares = V_TOT_HOG) # Continua q indica el total de hogares en una vivienda
 vivienda <- vivienda %>% mutate(materialPared = V_MAT_PARED) # Mantiene categoria DANE, 0 ruta para valores no registrados/otros
 vivienda <- vivienda %>% mutate(materialPiso = V_MAT_PISO) # Mantiene categoria DANE, 0 ruta para valores no registrados/otros
 
@@ -19,7 +20,7 @@ vivienda <- vivienda %>% mutate(tieneInternet = ifelse(VF_INTERNET == 1, 1, 0)) 
 
 vivienda <- vivienda %>% mutate(tipoSSanitario = V_TIPO_SERSA) # Mantiene categoria DANE, 0 ruta para valores no registrados/otros
 
-vivienda <- vivienda %>% select(U_DPTO, U_MPIO, COD_ENCUESTAS, U_VIVIENDA, U_EDIFICA, tipoVivienda, materialPared, materialPiso,
+vivienda <- vivienda %>% select(U_DPTO, U_MPIO, COD_ENCUESTAS, U_VIVIENDA, U_EDIFICA, tipoVivienda, totalHogares, materialPared, materialPiso,
 tieneEnergia, estratoEE, tieneAcueducto, tieneAlcantarillado, tieneGas, tieneServBasuras, tieneInternet, tipoSSanitario)
 
 vivienda[is.na(vivienda)] <- 0

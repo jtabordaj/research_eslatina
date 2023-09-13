@@ -17,6 +17,11 @@ personas <- personas %>% mutate(geAfro = ifelse(PA1_GRP_ETNIC == 5, 1, 0)) # 1 =
 
 personas <- personas %>% mutate(lugarNacimiento = PA_LUG_NAC) # Mantiene categorias DANE
 
+personas <- personas %>% mutate(seEnfermo = ifelse(P_ENFERMO == 1, 1, 0)) # 1 = Si, en el ultimo mes se enfermo
+personas <- personas %>% mutate(atencionMedica = P_QUEHIZO_PPAL) # Mantiene categorias DANE
+personas <- personas %>% mutate(fueAtendido = ifelse(PA_LO_ATENDIERON == 1, 1, 0)) # 1 = Fue atendido por su problema de salud
+personas <- personas %>% mutate(calidadSevicio = PA1_CALIDAD_SERV) # Mantiene categorias DANE
+
 personas <- personas %>% mutate(problemasFisicos = ifelse(CONDICION_FISICA == 1, 1, 0)) # 1 = Tiene problemas fisicos dia a dia
 
 personas <- personas %>% mutate(esAlfabeta = ifelse(P_ALFABETA == 1, 1, 0)) # 1 = Sabe leer y escribir
@@ -33,8 +38,9 @@ personas <- personas %>% mutate(estadoCivil = P_EST_CIVIL) # Mantiene categorias
 
 personas <- personas %>% mutate(tuvoHijos = ifelse(PA_HNV == 1, 1, 0)) # 1 = Ha tenido hijos nacidos vivos
 
+
 personas <- personas %>% select(U_DPTO, U_MPIO, COD_ENCUESTAS, U_VIVIENDA, P_NROHOG, P_NRO_PER, esMujer, grupoEdad, 
-noGrupoEtnico, geIndigena, geGitano, geRaizal, gePalenquero, geAfro, lugarNacimiento, problemasFisicos, esAlfabeta, 
+noGrupoEtnico, geIndigena, geGitano, geRaizal, gePalenquero, geAfro, lugarNacimiento, seEnfermo, atencionMedica, fueAtendido, calidadSevicio, problemasFisicos, esAlfabeta, 
 nivelEducativo, actividadReciente, estadoCivil, tuvoHijos)
 
 personas[is.na(personas)] <- 0
