@@ -3,7 +3,7 @@ source("./censo_dane/dependencies.R")
 # Santa Lucia, Atlantico - 675
 # Santa Rosa de Lima, Bolivar - 683
 
-divipola <- 13
+divipola <- 8
 readFiles(divipola)
 envir <- ls()
 dfsEnvir <- envir[sapply(envir, function(x) is.data.frame(get(x)))]
@@ -27,7 +27,7 @@ source("./censo_dane/vivienda.R")
 data <- inner_join(vivienda, personas, by = c("COD_ENCUESTAS", "U_DPTO", "U_MPIO", "U_VIVIENDA"))
 
 # Export
-canWrite <- TRUE
+canWrite <- FALSE
 
 if(canWrite == TRUE){
   wPath <- paste("./censo_dane/data/cnpv",divipola,".xlsx", sep = "")
